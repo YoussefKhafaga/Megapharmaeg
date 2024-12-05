@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  frontend:
+    build: ./frontend
+    ports:
+      - "3000:3000" # Expose frontend on port 3000
+    depends_on:
+      - backend
+
+  backend:
+    build: ./backend
+    ports:
+      - "5000:5000" # Expose backend on port 5000
+    volumes:
+      - ./backend/uploads:/app/uploads # Bind mount to persist uploads folder
+    environment:
+      - NODE_ENV=production
+      - PORT=5000
